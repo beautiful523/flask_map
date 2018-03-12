@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="max-age=3600">
+    <title>定位</title>
+    <script type="text/javascript"
+            src="//api.map.baidu.com/api?ak=ozEocuiQoRSXHaNQkmA9CNdQUE8fBH5I&type=lite&v=1.0"></script>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Times New Roman, serif;
+        }
+
+        #map_container {
+            height: 100%;
+            width: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="map_container"></div>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+
+
+    // 本示例演示添加多个海量覆盖物的使用方法,和Marker覆盖物主要区别是：
+    // 此覆盖物可支持上千个数量的覆盖物，性能还能保持流畅
+
+    var liteMap = new BMap.Map('map_container');
+    var pt = new BMap.Point(116.404, 39.915);
+    liteMap.centerAndZoom(pt, 12);
+    liteMap.addControl(new BMap.ZoomControl());
+
+    //从get_points获得如下形式的数据
+    //    [
+    //   {
+    //     "x": "116.331398",
+    //     "y": "39.897445"
+    //   },
+    //   {
+    //     "x": "116.331398",
+    //     "y": "39.997445"
+    //   }
+    // ]
+    $.get('get_points', function (points) {
+        var arrFeatures = [];
+        for (var i = 0; i < points.length; i++) {
+            // 初始化位置
+            var mpt = new BMap.Point(points[i]["x"], points[i]["y"]);
+            // mass对象
+            var massFeature = new BMap.MassFeature(mpt, {data: 'MassFeature'});
+            arrFeatures.push(massFeature);
+        }
+        liteMap.addMassFeatures(arrFeatures);
+
+    })
+</script>
+</html>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
