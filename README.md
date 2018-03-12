@@ -1,1 +1,2 @@
-map.html是将坐标一个一个标注，如有此种需要可采用，
+todo：
+mass_features.html里面滚轮缩放不起作用，加了enableScrollWheelZoom();之后不再出现标志点
