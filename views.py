@@ -20,6 +20,12 @@ def one_by_one():
     return render_template("map.html")
 
 
+# square.html的标注物是正方形
+@app.route("/squ", methods=["GET"])
+def square():
+    return render_template("square.html")
+
+
 @app.route("/get_points", methods=["GET"])
 def get_points():
     # 往CSV文件里面写入数据
@@ -45,11 +51,11 @@ def get_points():
     #     }
     # ]
     result = []
-    with open('haidian_dazhong.csv', 'r') as file:
+    with open('csv_test.csv', 'r') as file:
         reader = csv.reader(file)
         for line in reader:
             # print(line)  # ['116.331398', '39.897445']
-            result.append({'x': line[2], 'y': line[1]})
+            result.append({'x': line[0], 'y': line[1]})
     # with open('haidian_meituan.csv', 'r') as file:
     #     reader = csv.reader(file)
     #     for line in reader:
