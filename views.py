@@ -9,13 +9,13 @@ app.config["UP"] = os.path.join(os.path.dirname(__file__), "static/uploads")
 
 
 # mass_feature.html是将坐标点一次性全部标注，显示效果与map.html一样，效率更高，但不能缩放移动。
-@app.route("/", methods=["GET"])
+@app.route("/mass/", methods=["GET"])
 def mass_feature():
     return render_template("mass_features.html")
 
 
 # map.html是将坐标逐个显示，可缩放可移动
-@app.route("/onebyone", methods=["GET"])
+@app.route("/", methods=["GET"])
 def one_by_one():
     return render_template("map.html")
 
@@ -45,12 +45,17 @@ def get_points():
     #     }
     # ]
     result = []
-    with open('csv_test.csv', 'r') as file:
+    with open('haidian_dazhong.csv', 'r') as file:
         reader = csv.reader(file)
-        # print(reader)  # <_csv.reader object at 0x103988128>
         for line in reader:
             # print(line)  # ['116.331398', '39.897445']
-            result.append({'x': line[0], 'y': line[1]})
+            result.append({'x': line[2], 'y': line[1]})
+    # with open('haidian_meituan.csv', 'r') as file:
+    #     reader = csv.reader(file)
+    #     for line in reader:
+    #         # print(line)  # ['116.331398', '39.897445']
+    #         result.append({'x': line[2], 'y': line[1]})
+
     return jsonify(result)
 
 
