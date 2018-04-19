@@ -28,39 +28,24 @@ def square():
 
 @app.route("/get_points", methods=["GET"])
 def get_points():
-    # 往CSV文件里面写入数据
-    # csv_file = open('csv_test.csv', 'w')
-    # writer = csv.writer(csv_file)
-    # data = [
-    #     (116.331398, 39.897445),
-    #     (116.331398, 39.997445)
-    # ]
-    # writer.writerows(data)
-    # csv_file.close()
-
-    # 从CSV文件里面读取数据
-    # 返回的result为如下格式：
-    # [
-    #     {
-    #         "x": "116.331398",
-    #         "y": "39.897445"
-    #     },
-    #     {
-    #         "x": "116.331398",
-    #         "y": "39.997445"
-    #     }
-    # ]
     result = []
-    with open('csv_test.csv', 'r') as file:
+    with open('/home/zyw/test/flask_map/haidian_meituan.csv', 'r') as file:
         reader = csv.reader(file)
         for line in reader:
             # print(line)  # ['116.331398', '39.897445']
-            result.append({'x': line[0], 'y': line[1]})
-    # with open('haidian_meituan.csv', 'r') as file:
-    #     reader = csv.reader(file)
-    #     for line in reader:
-    #         # print(line)  # ['116.331398', '39.897445']
-    #         result.append({'x': line[2], 'y': line[1]})
+            result.append({'x': line[2], 'y': line[1]})
+
+    return jsonify(result)
+
+
+@app.route("/get_points_b", methods=["GET"])
+def get_points_b():
+    result = []
+    with open('/home/zyw/test/flask_map/haidian_dazhong.csv', 'r') as file:
+        reader = csv.reader(file)
+        for line in reader:
+            # print(line)  # ['116.331398', '39.897445']
+            result.append({'x': line[2], 'y': line[1]})
 
     return jsonify(result)
 

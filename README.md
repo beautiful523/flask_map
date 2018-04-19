@@ -1,2 +1,5 @@
-todo：
-mass_features.html里面滚轮缩放不起作用，加了enableScrollWheelZoom();之后不再出现标志点
+- 使用的虚拟环境是python3.5_venv
+- 如果没有虚拟环境需要安装flask
+- 运行views.py
+- 浏览器http://127.0.0.1:8888/squ查看小方块标记
+- 适当修改传过来的csv文件

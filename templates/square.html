@@ -67,13 +67,21 @@
         this._div.style.top = position.y - this._length / 2 + "px";
     };
     $.get('get_points', function (points) {
-        var arrFeatures = [];
         for (var i = 0; i < points.length; i++) {
             // 初始化位置
             var mpt = {lng: points[i]["x"], lat: points[i]["y"]};
             var mySquare = new SquareOverlay(mpt, 5, "red");
             map.addOverlay(mySquare);
         }
+        $.get('get_points_b', function (points) {
+        for (var i = 0; i < points.length; i++) {
+            // 初始化位置
+            var mpt = {lng: points[i]["x"], lat: points[i]["y"]};
+            var mySquare = new SquareOverlay(mpt, 5, "blue");
+            map.addOverlay(mySquare);
+        }
+
+    })
     })
     // 添加自定义覆盖物
 
